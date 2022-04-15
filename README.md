@@ -1,2 +1,2 @@
-# cadastro_de_pessoas
+# cadastro de pessoas
  
