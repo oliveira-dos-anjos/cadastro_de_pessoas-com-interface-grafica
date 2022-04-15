@@ -1,6 +1,9 @@
 from dependências.funções import *
 
 def ArquivoExist(arq):
+    """
+    ->função para verificar se o arquivo gerado
+    """
     try:
         a = open(arq, 'rt')
         a.close()
@@ -11,6 +14,9 @@ def ArquivoExist(arq):
   
     
 def Criar_Arq(arq):
+    """
+    ->função para criar um arquivo .txt caso ele nao exista
+    """
     try:
         a = open(arq, 'wt+')
         a.close()
@@ -21,6 +27,9 @@ def Criar_Arq(arq):
 
 
 def LerArquivo(arq):
+    """
+    ->função para ler os dados no arquivo
+    """
     try:
         a = open(arq, "rt")
     except:
@@ -35,6 +44,9 @@ def LerArquivo(arq):
         a.close()
     
 def cadastro(arq, nome="Desconhecido", nascimento=0, peso=0, contato=0):
+    """
+    ->função para cadastrar dados pessoais no arquivo .txt
+    """
     try:
         a = open(arq, 'at')
     except:

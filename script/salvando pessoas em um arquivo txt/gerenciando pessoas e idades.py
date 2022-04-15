@@ -3,7 +3,8 @@ from dependências.arquivo import *
 
 # programa principal
 
-arq = 'tentando_um_mini_banco_de_dados'
+# Verifica se o arquivo existe, se não, o arquivo é criado
+arq = 'Dados cadastrais'
 if not ArquivoExist(arq):
     Criar_Arq(arq)
 
