@@ -1,5 +1,6 @@
 from dependências.funções import *
 from dependências.arquivo import *
+from datetime import *
 
 # programa principal
 
@@ -23,8 +24,13 @@ while True:
         peso = LeiaFloat('Informe seu peso: ')
         contato = leiaInt2('Informe um número para contato: ')
         nascimento = str(f'{dia}/{mes}/{ano}')
-        
 
+        # calculando a idade
+
+        dat_nasc = date(ano, mes, dia)
+        nasc = date.today() - datnasc
+        calculo_idade = nasc.days / 365.25
+        idade = int(calculo_idade)
 
 
         cadastro(arq, nome, nascimento, peso, contato)
