@@ -34,20 +34,7 @@ def leiaInt(msg):
                 print('ERRO: o valor nao corresponde a uma das opções:')
 
 
-def leiaCont(msg):
-    while True:
-        try:
-            n = int(input(msg))
-            contato = str(n)
-        except (ValueError, TypeError):
-            print("ERRO: o valor nao corresponde a um numero")
-        except KeyboardInterrupt:
-            print("A leitura de dados foi interrompida pelo usuário")
-        else:
-            if len(contato) <=9:
-                print("os dados nao correspondem a um número telefônico")
-            else:
-                return n
+
             
 
 def leiaDia(msg):
@@ -92,35 +79,8 @@ def leiaAno(msg):
             return n
 
 
-def calculo_idade(a, m, d):
-    while True:
-        try:
-            dat_nasc = date(a, m, d)
-            nasc = date.today() - dat_nasc
-            calculo_idade = nasc.days / 365.25
-            idade = int(calculo_idade)
-            nascimento = str(f"{d}/{m}/{a}")
-        except:
-            print("Algumas informações de nascimento ficaram erradas: ")
-            d = leiaDia('Informe o dia do seu nascimento: ')
-            m = leiaMes('Informe o mes do nascimento: ')
-            a = leiaAno('Informe o ano do nascimento: ')
-            nascimento = calculo_idade(a, m, d)
-        else:
-            return nascimento
 
 
-def LeiaFloat(msg):
-    while True:
-        try:
-            n = float(input(msg).replace(",", "."))
-        except (ValueError, TypeError):
-            print("ERRO: o valor nao corresponde a um numero")
-        except KeyboardInterrupt:
-            print("A leitura de dados foi interrompida pelo usuário")
-        else:
-            return f'{n:.1f}'
-            
 
 def pessoas():
     sleep(1)
