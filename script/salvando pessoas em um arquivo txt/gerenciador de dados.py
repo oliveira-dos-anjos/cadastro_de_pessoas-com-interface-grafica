@@ -1,3 +1,4 @@
+from operator import index
 from dependências.arquivo import *
 from datetime import *
 from tkinter import *
@@ -99,25 +100,17 @@ def terceira_janela():
     contato = Entry(janela3, width=20)
     contato.place(x=145, y=110)
 
-    dia = mes = ano = 00
 
 
     # função para salvar os arquivos
 
     def leiaCont(ct):
         try:
-            n = int(input(ct))
-            contato = str(n)
+            if ct.isnumeric():
+                c = ct
         except:
-            label_ct = Label(janela3, text="!", bg='red')
-            label_ct.place(x=272, y=110)
-            
-        else:
-            if len(contato) <=9:
-                label_ct = Label(janela3, text="!", bg='red')
-                label_ct.place(x=272, y=110)
-            else:
-                return n
+            index()
+        return c
 
 
     def calculo_idade(a, m, d):
@@ -128,19 +121,26 @@ def terceira_janela():
             idade = int(calculo_idade)
             nascimento = str(f"{d}/{m}/{a}")
         except:
-            label_msg = Label(janela3, text="Algumas informações de nascimento estão incorretas")
-            label_msg.place(x=10, y=180)
+            label_a = Label(janela3, text="?", bg='red')
+            label_a.place(x=272, y=60)
+            
+            label_msg = Label(janela3, text="Algumas informações de nascimento estão incorretas", bg= 'yellow')
+            label_msg.place(x=10, y=190)
 
-            label_ano = Label(janela3, text="?", bg='red')
-            label_ano.place(x=272, y=60)
+
 
 
         else:
+
+            label_msg = Label(janela3, text="                                              ", bg= 'cyan')
+            label_msg.place(x=10, y=190)
+
             return nascimento
 
 
 
     def salvar():
+        contt = 0
         nm = nome.get()
         if nm == "" or nm.isspace():
             label_nm = Label(janela3, text="?", bg='red')
@@ -148,32 +148,66 @@ def terceira_janela():
         else:
             n = str(nm)
 
+            label_n = Label(janela3, text="  ", bg= 'cyan')
+            label_n.place(x=272, y=10)
+
+
+
         sx = str(sexo.get()).upper().strip()
         if sx == 'F' or sx == 'M':
-             s = str(sx)
+            s = str(sx)
+            label_sx = Label(janela3, text="  ", bg= 'cyan')
+            label_sx.place(x=272, y=35)
 
         else:
             label_sx = Label(janela3, text="?", bg='red')
             label_sx.place(x=272, y=35)
            
+        try:
 
-        d = int(dia.get())
-        m = int(mes.get())
-        a = int(ano.get())
-        ps = peso.get()
-        p = float(ps)
-        ct = str(contato.get())
-        c = leiaCont(ct)
-        if len(ct) <= 8:
-            label_sx = Label(janela3, text="?", bg='red')
-            label_sx.place(x=272, y=80)
-        nascimento = calculo_idade(a, m, d)
+            ps = str(peso.get())
+            try:
+                p = float(ps)
+                label_p = Label(janela3, text="  ", bg= 'cyan')
+                label_p.place(x=272, y=85)
 
 
+            except:
+                label_p = Label(janela3, text="?", bg='red')
+                label_p.place(x=272, y=85)
+            
+            ct = contato.get().strip()
+            
+            if len(ct) <= 9:
+                label_ct = Label(janela3, text="?", bg='red')
+                label_ct.place(x=272, y=110)
+            else:
 
+                c = leiaCont(ct)
+                label_ct = Label(janela3, text="  ", bg= 'cyan')
+                label_ct.place(x=272, y=110)
+                
 
+                contt = 1
+            try:
+                d = int(dia.get())
+                D = str(d)
+                m = int(mes.get())
+                M = str(m)
+                a = int(ano.get())
+                A = str(a)
 
+                nascimento = calculo_idade(a, m, d)
+                label_nasc = Label(janela3, text="  ", bg= 'cyan')
+                label_nasc.place(x=272, y=60)
 
+            except:
+
+                label_ano = Label(janela3, text="?", bg='red')
+                label_ano.place(x=272, y=60)
+
+        except:
+            index()
 
         try:
             a = open(arq, 'at')
@@ -183,13 +217,22 @@ def terceira_janela():
         else:
             try:
                 if nascimento:
-                    a.write(f"{n};{s};{nascimento};{p:.1f};{c}\n")
-                    label_msg = Label(janela3, text=f'Novo registro de \'{n}\' adicionado com sucesso.')
-                    label_msg.place(x=10, y=200)
-                    
+                    if p:
+                        if s:
+                            if n:
+                                if contt == 1:
+                                    try:
+                                        a.write(f"{n};{s};{nascimento};{p:.1f};{contt}\n")
+                                        print('ff')
+                                        label_msg = Label(janela3, text=f'Novo registro de \'{n}\' adicionado com sucesso.', bg='green')
+                                        label_msg.place(x=10, y=190)
+
+ 
+                                    except:
+                                        index()()
             except:
-                label_msg = Label(janela3, text="Houve um erro ao salvar o arquivo")
-                label_msg.place(x=10, y=165)
+                label_msg = Label(janela3, text="Houve um erro ao salvar o arquivo", bg= 'red')
+                label_msg.place(x=10, y=190)
             else:
 
                 a.close()
@@ -205,7 +248,7 @@ def terceira_janela():
 
 
     btn = Button(janela3, text= "fechar janela", command= janela3.destroy, bg= 'red')
-    btn.place(x=165, y=220)
+    btn.place(x=410, y=220)
 
 
 
@@ -223,8 +266,8 @@ janela.iconphoto(True, img)
 
 
 #dimensões da janela3 principal
-largura = 600
-altura = 300
+largura = 300
+altura = 150
 
 # resolução do sistema
 largura_screen = janela.winfo_screenwidth()
