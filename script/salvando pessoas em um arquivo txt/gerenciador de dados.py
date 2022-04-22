@@ -1,9 +1,26 @@
-from operator import index
-from dependências.arquivo import *
 from datetime import *
+from operator import index
 from tkinter import *
 
 
+def ArquivoExist(arq):
+    try:
+        a = open(arq, 'rt')
+        a.close()
+    except FileNotFoundError:
+        return False
+    else:
+        return True
+  
+    
+def Criar_Arq(arq):
+    try:
+        a = open(arq, 'wt+')
+        a.close()
+    except:
+        print('Houve um erro na criação do arquivo!')
+    else:
+        print(f'Arquivo {arq} criado com sucesso!')
 
 
 def segunda_janela():
@@ -123,17 +140,17 @@ def terceira_janela():
         except:
             label_a = Label(janela3, text="?", bg='red')
             label_a.place(x=272, y=60)
+
+            label_a = Label(janela3, text="                                                                 ", bg= 'cyan')
+            label_a.place(x=10, y=190)
             
-            label_msg = Label(janela3, text="Algumas informações de nascimento estão incorretas", bg= 'yellow')
-            label_msg.place(x=10, y=190)
+            label_a = Label(janela3, text="Verifique seu nascimento", bg= 'yellow')
+            label_a.place(x=10, y=190)
 
 
 
 
         else:
-
-            label_msg = Label(janela3, text="                                              ", bg= 'cyan')
-            label_msg.place(x=10, y=190)
 
             return nascimento
 
@@ -146,7 +163,7 @@ def terceira_janela():
             label_nm = Label(janela3, text="?", bg='red')
             label_nm.place(x=272, y=10)
         else:
-            n = str(nm)
+            n = str(nm).upper()
 
             label_n = Label(janela3, text="  ", bg= 'cyan')
             label_n.place(x=272, y=10)
@@ -186,16 +203,13 @@ def terceira_janela():
                 c = leiaCont(ct)
                 label_ct = Label(janela3, text="  ", bg= 'cyan')
                 label_ct.place(x=272, y=110)
-                
-
                 contt = 1
+
+
             try:
                 d = int(dia.get())
-                D = str(d)
                 m = int(mes.get())
-                M = str(m)
                 a = int(ano.get())
-                A = str(a)
 
                 nascimento = calculo_idade(a, m, d)
                 label_nasc = Label(janela3, text="  ", bg= 'cyan')
@@ -222,8 +236,7 @@ def terceira_janela():
                             if n:
                                 if contt == 1:
                                     try:
-                                        a.write(f"{n};{s};{nascimento};{p:.1f};{contt}\n")
-                                        print('ff')
+                                        a.write(f"{n};{s};{nascimento};{p:.1f};{ct}\n")
                                         label_msg = Label(janela3, text=f'Novo registro de \'{n}\' adicionado com sucesso.', bg='green')
                                         label_msg.place(x=10, y=190)
 
@@ -231,6 +244,7 @@ def terceira_janela():
                                     except:
                                         index()()
             except:
+
                 label_msg = Label(janela3, text="Houve um erro ao salvar o arquivo", bg= 'red')
                 label_msg.place(x=10, y=190)
             else:
@@ -254,6 +268,14 @@ def terceira_janela():
 
 
 # programa principal
+
+
+# Verifica se o arquivo existe, se não, o arquivo é criado
+arq = 'Dados cadastrais'
+if not ArquivoExist(arq):
+    Criar_Arq(arq)
+
+
 
 # layout da janela3 principal
 janela = Tk()
@@ -291,11 +313,6 @@ btn = Button(janela, text= '3 - sair do sistema', command= janela.destroy, bg= '
 btn.place(x=15, y=120)
 
 
-
-# Verifica se o arquivo existe, se não, o arquivo é criado
-arq = 'Dados cadastrais'
-if not ArquivoExist(arq):
-    Criar_Arq(arq)
 
 
 janela.mainloop()
