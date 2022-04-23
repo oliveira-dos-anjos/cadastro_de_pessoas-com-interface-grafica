@@ -1,6 +1,7 @@
 from datetime import *
 from operator import index
 from tkinter import *
+from matplotlib import image
 
 
 def ArquivoExist(arq):
@@ -27,7 +28,10 @@ def segunda_janela():
     janela2 = Toplevel()
     janela2.title('dados cadastrados')
     janela2.geometry('600x300+200+200')
-    janela2['bg'] = 'gray'
+
+    logo = Label(janela2, image=imagem)
+    logo.place(x=0, y=0)
+    
     janela2.resizable(False,False)
 
     h = Scrollbar(janela2, orient = 'horizontal') 
@@ -75,9 +79,13 @@ def segunda_janela():
 def terceira_janela():
     janela3 = Toplevel()
     janela3.geometry('500x250')
-    janela3['bg'] = 'cyan'
+
+    logo = Label(janela3, image=imagem)
+    logo.place(x=0, y=0)
+
     janela3.title('adicionar novos dados')
     janela3.resizable(False, False)
+
 
 
 
@@ -85,37 +93,37 @@ def terceira_janela():
     label_nome = Label(janela3, text="nome")
     label_nome.place(x=10, y=10)
     nome = Entry(janela3, width=20)
-    nome.place(x=145, y=10)
+    nome.place(x=105, y=10)
 
     label_sexo = Label(janela3, text="sexo [F/M]")
     label_sexo.place(x=10, y=35)
     sexo = Entry(janela3, width=20)
-    sexo.place(x=145, y=35)
+    sexo.place(x=105, y=35)
 
     label_dia = Label(janela3, text="nascimento")
     label_dia.place(x=10, y=60)
     dia = Entry(janela3, width=4)
-    dia.place(x=145, y=60)
+    dia.place(x=105, y=60)
 
     label_mes = Label(janela3, text="/")
-    label_mes.place(x=173, y=59)
+    label_mes.place(x=133, y=59)
     mes = Entry(janela3, width=4)
-    mes.place(x=184, y=60)
+    mes.place(x=144, y=60)
 
     label_ano = Label(janela3, text="/")
-    label_ano.place(x=211, y=59)
+    label_ano.place(x=171, y=59)
     ano = Entry(janela3, width=7)
-    ano.place(x=222, y=60)
+    ano.place(x=182, y=60)
 
     label_peso = Label(janela3, text="peso")
     label_peso.place(x=10, y=85)
     peso = Entry(janela3, width=20)
-    peso.place(x=145, y=85)
+    peso.place(x=105, y=85)
 
     label_contato = Label(janela3, text="contato")
     label_contato.place(x=10, y=110)
     contato = Entry(janela3, width=20)
-    contato.place(x=145, y=110)
+    contato.place(x=105, y=110)
 
 
 
@@ -137,9 +145,10 @@ def terceira_janela():
             calculo_idade = nasc.days / 365.25
             idade = int(calculo_idade)
             nascimento = str(f"{d}/{m}/{a}")
+
         except:
             label_a = Label(janela3, text="?", bg='red')
-            label_a.place(x=272, y=60)
+            label_a.place(x=232, y=60)
 
             label_a = Label(janela3, text="                                                                 ", bg= 'cyan')
             label_a.place(x=10, y=190)
@@ -161,12 +170,13 @@ def terceira_janela():
         nm = nome.get()
         if nm == "" or nm.isspace():
             label_nm = Label(janela3, text="?", bg='red')
-            label_nm.place(x=272, y=10)
+            label_nm.place(x=232, y=10)
         else:
             n = str(nm).upper()
+            
 
             label_n = Label(janela3, text="  ", bg= 'cyan')
-            label_n.place(x=272, y=10)
+            label_n.place(x=232, y=10)
 
 
 
@@ -174,11 +184,11 @@ def terceira_janela():
         if sx == 'F' or sx == 'M':
             s = str(sx)
             label_sx = Label(janela3, text="  ", bg= 'cyan')
-            label_sx.place(x=272, y=35)
+            label_sx.place(x=232, y=35)
 
         else:
             label_sx = Label(janela3, text="?", bg='red')
-            label_sx.place(x=272, y=35)
+            label_sx.place(x=232, y=35)
            
         try:
 
@@ -186,23 +196,23 @@ def terceira_janela():
             try:
                 p = float(ps)
                 label_p = Label(janela3, text="  ", bg= 'cyan')
-                label_p.place(x=272, y=85)
+                label_p.place(x=232, y=85)
 
 
             except:
                 label_p = Label(janela3, text="?", bg='red')
-                label_p.place(x=272, y=85)
+                label_p.place(x=232, y=85)
             
             ct = contato.get().strip()
             
             if len(ct) <= 9:
                 label_ct = Label(janela3, text="?", bg='red')
-                label_ct.place(x=272, y=110)
+                label_ct.place(x=232, y=110)
             else:
 
                 c = leiaCont(ct)
                 label_ct = Label(janela3, text="  ", bg= 'cyan')
-                label_ct.place(x=272, y=110)
+                label_ct.place(x=232, y=110)
                 contt = 1
 
 
@@ -213,12 +223,12 @@ def terceira_janela():
 
                 nascimento = calculo_idade(a, m, d)
                 label_nasc = Label(janela3, text="  ", bg= 'cyan')
-                label_nasc.place(x=272, y=60)
+                label_nasc.place(x=232, y=60)
 
             except:
 
                 label_ano = Label(janela3, text="?", bg='red')
-                label_ano.place(x=272, y=60)
+                label_ano.place(x=232, y=60)
 
         except:
             index()
@@ -239,6 +249,7 @@ def terceira_janela():
                                         a.write(f"{n};{s};{nascimento};{p:.1f};{ct}\n")
                                         label_msg = Label(janela3, text=f'Novo registro de \'{n}\' adicionado com sucesso.', bg='green')
                                         label_msg.place(x=10, y=190)
+                                        limpar_tela()
 
  
                                     except:
@@ -250,6 +261,14 @@ def terceira_janela():
             else:
 
                 a.close()
+    def limpar_tela():
+        nome.delete(0, END)
+        sexo.delete(0, END)
+        dia.delete(0, END)
+        mes.delete(0, END)
+        ano.delete(0, END)
+        peso.delete(0, END)
+        contato.delete(0, END)
 
 
 
@@ -257,13 +276,12 @@ def terceira_janela():
     btn = Button(janela3, text= 'salvar', command= salvar, bg= 'green')
     btn.place(x=35, y=220)
 
-    btn = Button(janela3, text= "limpar", command= janela3.destroy, bg= 'orange')
+    btn = Button(janela3, text= "limpar", command= limpar_tela, bg= 'orange')
     btn.place(x=100, y=220)
 
 
     btn = Button(janela3, text= "fechar janela", command= janela3.destroy, bg= 'red')
     btn.place(x=410, y=220)
-
 
 
 
@@ -283,6 +301,12 @@ janela.title("gerenciador de dados pessoais")
 janela['bg'] = 'gray'
 img = PhotoImage(file= 'C:\\Users\\RAFAEL\Desktop\\adição e manipulacão de dados\\dependências\\imagem\\icone.png')
 janela.iconphoto(True, img)
+
+imagem = PhotoImage(file= 'C:\\Users\\RAFAEL\\Documents\\minhas-ideias\\tkinter\\imagens\\img.GIF')
+
+image = imagem.subsample(0,0)
+logo = Label(janela, image=imagem)
+logo.place(x=0, y=0)
 
 
 
