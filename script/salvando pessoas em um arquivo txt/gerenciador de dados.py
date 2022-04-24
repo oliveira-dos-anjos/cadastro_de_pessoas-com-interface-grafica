@@ -81,7 +81,7 @@ def terceira_janela():
     janela3 = Toplevel()
     logo = Label(janela3, image=imagem)
     logo.place(x=0, y=0)
-
+    janela3.geometry('500x250+200+200')
     janela3.title('adicionar novos dados')
     janela3.resizable(False, False)
 
