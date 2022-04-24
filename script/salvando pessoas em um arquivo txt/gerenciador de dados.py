@@ -3,7 +3,7 @@ from operator import index
 from tkinter import *
 from matplotlib import image
 
-
+#função para verificar a existência de um arquivo .txt na pasta.
 def ArquivoExist(arq):
     try:
         a = open(arq, 'rt')
@@ -13,7 +13,7 @@ def ArquivoExist(arq):
     else:
         return True
   
-    
+ #função para caso nao exista um arquivo .txt na pasta, ele criará um.   
 def Criar_Arq(arq):
     try:
         a = open(arq, 'wt+')
@@ -23,7 +23,7 @@ def Criar_Arq(arq):
     else:
         print(f'Arquivo {arq} criado com sucesso!')
 
-
+#janela onde mostrará os dados salvos de forma alinhada.
 def segunda_janela():
     janela2 = Toplevel()
     janela2.title('dados cadastrados')
@@ -75,11 +75,10 @@ def segunda_janela():
     btn = Button(janela2, text= 'fechar janela3', command= janela2.destroy,  width=11, height=2, bg= 'red', fg= 'black', font=('Ivy 8 bold'), relief='raised', overrelief='ridge')
     btn.place(x=495, y=240)
 
-
+#janela onde será possível adicionar novos dados. 
 def terceira_janela():
-    janela3 = Toplevel()
-    janela3.geometry('500x250+400+400')
 
+    janela3 = Toplevel()
     logo = Label(janela3, image=imagem)
     logo.place(x=0, y=0)
 
@@ -89,7 +88,7 @@ def terceira_janela():
 
 
 
-    # recebendo os dados a partir da terceira janela3
+    # Labels para receber os dados a partir da terceira janela3
     label_nome = Label(janela3, text="nome")
     label_nome.place(x=10, y=10)
     nome = Entry(janela3, width=20)
@@ -127,7 +126,7 @@ def terceira_janela():
 
 
 
-
+    #função para verificar se o contato é apenas numérico.
     def leiaCont(ct):
         try:
             if ct.isnumeric():
@@ -138,7 +137,7 @@ def terceira_janela():
 
 
 
-
+    #função para valdar e salvar os dados adicionados nas Labels.
     def salvar():
         contt = 0
         nm = nome.get()
@@ -249,7 +248,7 @@ def terceira_janela():
 
                 a.close()
 
-
+    #função para limpar a tela quando o usuário desejar e apos um salvamento bem sucedido.
     def limpar_tela():
         nome.delete(0, END)
         sexo.delete(0, END)
@@ -311,8 +310,6 @@ altura_screen = janela.winfo_screenheight()
 # faz com que a janela principal sempre apareça no centro
 posx = (largura_screen / 2) - (largura / 2)
 posy = (altura_screen / 2) - (altura / 2)
-
-#define a geometria da janela principal
 janela.geometry('%dx%d+%d+%d' % (largura, altura, posx, posy))
 janela.resizable(False, False)
 
