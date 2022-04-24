@@ -137,27 +137,6 @@ def terceira_janela():
         return c
 
 
-    def calculo_idade(a, m, d):
-        try:
-            dat_nasc = date(a, m, d)
-            nasc = date.today() - dat_nasc
-            calculo_idade = nasc.days / 365.25
-            idade = int(calculo_idade)
-            nascimento = str(f"{d}/{m}/{a}")
-
-        except:
-            label_a = Label(janela3, text="?", bg='red')
-            label_a.place(x=232, y=60)
-
-            label_a = Label(janela3, text="Verifique suas informações de nascimento", bg= 'yellow')
-            label_a.place(x=10, y=170)
-
-
-
-
-        else:
-
-            return nascimento
 
 
     def salvar():
@@ -187,7 +166,7 @@ def terceira_janela():
            
         try:
 
-            ps = str(peso.get())
+            ps = str(peso.get()).replace(',', '.')
             try:
                 p = float(ps)
                 label_p = Label(janela3, text="  ", bg= 'cyan')
@@ -216,12 +195,25 @@ def terceira_janela():
                 m = int(mes.get())
                 a = int(ano.get())
 
-                nascimento = calculo_idade(a, m, d)
-                label_nasc = Label(janela3, text="  ", bg= 'cyan')
-                label_nasc.place(x=232, y=60)
+                nasc = date(a, m, d)
+
+                idd = date.today() - nasc
+                calculo_idade = idd.days / 365.25
+                idade = int(calculo_idade)
+                if nasc <= date.today():
+                    label_nasc = Label(janela3, text="  ", bg= 'cyan')
+                    label_nasc.place(x=232, y=60)
+
+                    nascimento = str(f"{d}/{m}/{a}")
+
+                    label_nasc = Label(janela3, text="  ", bg= 'cyan')
+                    label_nasc.place(x=232, y=60)
+
+
 
             except:
 
+  
                 label_ano = Label(janela3, text="?", bg='red')
                 label_ano.place(x=232, y=60)
 
@@ -251,7 +243,7 @@ def terceira_janela():
                                         index()()
             except:
 
-                label_msg = Label(janela3, text="Preencha os campos corretamente", bg= 'red')
+                label_msg = Label(janela3, text="Preencha todos os campos corretamente", bg= 'red')
                 label_msg.place(x=10, y=170)
             else:
 
