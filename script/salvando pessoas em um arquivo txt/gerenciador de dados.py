@@ -72,13 +72,13 @@ def segunda_janela():
     v.config(command=t.yview) 
 
 
-    btn = Button(janela2, text= 'fechar janela3', command= janela2.destroy, bg= 'red')
-    btn.place(x=500, y=250)
+    btn = Button(janela2, text= 'fechar janela3', command= janela2.destroy,  width=11, height=2, bg= 'red', fg= 'black', font=('Ivy 8 bold'), relief='raised', overrelief='ridge')
+    btn.place(x=495, y=240)
 
 
 def terceira_janela():
     janela3 = Toplevel()
-    janela3.geometry('500x250')
+    janela3.geometry('500x250+400+400')
 
     logo = Label(janela3, image=imagem)
     logo.place(x=0, y=0)
@@ -127,7 +127,6 @@ def terceira_janela():
 
 
 
-    # função para salvar os arquivos
 
     def leiaCont(ct):
         try:
@@ -150,11 +149,8 @@ def terceira_janela():
             label_a = Label(janela3, text="?", bg='red')
             label_a.place(x=232, y=60)
 
-            label_a = Label(janela3, text="                                                                 ", bg= 'cyan')
-            label_a.place(x=10, y=190)
-            
-            label_a = Label(janela3, text="Verifique seu nascimento", bg= 'yellow')
-            label_a.place(x=10, y=190)
+            label_a = Label(janela3, text="Verifique suas informações de nascimento", bg= 'yellow')
+            label_a.place(x=10, y=170)
 
 
 
@@ -162,7 +158,6 @@ def terceira_janela():
         else:
 
             return nascimento
-
 
 
     def salvar():
@@ -237,7 +232,7 @@ def terceira_janela():
             a = open(arq, 'at')
         except:
             label_msg = Label(janela3, text="Houve um erro ao abrir o arquivo!")
-            label_msg.place(x=10, y=180)
+            label_msg.place(x=10, y=170)
         else:
             try:
                 if nascimento:
@@ -248,7 +243,7 @@ def terceira_janela():
                                     try:
                                         a.write(f"{n};{s};{nascimento};{p:.1f};{ct}\n")
                                         label_msg = Label(janela3, text=f'Novo registro de \'{n}\' adicionado com sucesso.', bg='green')
-                                        label_msg.place(x=10, y=190)
+                                        label_msg.place(x=10, y=170)
                                         limpar_tela()
 
  
@@ -256,11 +251,13 @@ def terceira_janela():
                                         index()()
             except:
 
-                label_msg = Label(janela3, text="Houve um erro ao salvar o arquivo", bg= 'red')
-                label_msg.place(x=10, y=190)
+                label_msg = Label(janela3, text="Preencha os campos corretamente", bg= 'red')
+                label_msg.place(x=10, y=170)
             else:
 
                 a.close()
+
+
     def limpar_tela():
         nome.delete(0, END)
         sexo.delete(0, END)
@@ -273,15 +270,15 @@ def terceira_janela():
 
 
     # definindo botoes da terceira janela3
-    btn = Button(janela3, text= 'salvar', command= salvar, bg= 'green')
-    btn.place(x=35, y=220)
+    btn = Button(janela3, text= 'salvar', command= salvar, width=10, height=2, bg= 'green', fg= 'black', font=('Ivy 8 bold'), relief='raised', overrelief='ridge')
+    btn.place(x=20, y=200)
 
-    btn = Button(janela3, text= "limpar", command= limpar_tela, bg= 'orange')
-    btn.place(x=100, y=220)
+    btn = Button(janela3, text= "limpar", command= limpar_tela, width=10, height=2, bg= 'orange', fg= 'black', font=('Ivy 8 bold'), relief='raised', overrelief='ridge')
+    btn.place(x=115, y=200)
 
 
-    btn = Button(janela3, text= "fechar janela", command= janela3.destroy, bg= 'red')
-    btn.place(x=410, y=220)
+    btn = Button(janela3, text= "fechar janela", command= janela3.destroy, width=10, height=2, bg= 'red', fg= 'black', font=('Ivy 8 bold'), relief='raised', overrelief='ridge')
+    btn.place(x=410, y=200)
 
 
 
@@ -312,8 +309,8 @@ logo.place(x=0, y=0)
 
 
 #dimensões da janela3 principal
-largura = 300
-altura = 150
+largura = 500
+altura = 250
 
 # resolução do sistema
 largura_screen = janela.winfo_screenwidth()
@@ -325,16 +322,17 @@ posy = (altura_screen / 2) - (altura / 2)
 
 #define a geometria da janela principal
 janela.geometry('%dx%d+%d+%d' % (largura, altura, posx, posy))
+janela.resizable(False, False)
 
 #adicionando botoes na janela3 principal
-btn = Button(janela, text= '1 - ver pessoas cadastrados',command=segunda_janela, bg= 'green')
+btn = Button(janela, text= '1 - ver pessoas cadastrados',command=segunda_janela, width=25, height=2, bg= 'yellow', fg= 'black', font=('Ivy 8 bold'), relief='raised', overrelief='ridge')
 btn.place(x=15, y=40)
 
-btn = Button(janela, text= '2 - cadastrar novas pessoas', command=terceira_janela, bg= 'blue')
-btn.place(x=15, y=80)
+btn = Button(janela, text= '2 - cadastrar novas pessoas', command=terceira_janela, width=25, height=2, bg= 'green', fg= 'black', font=('Ivy 8 bold'), relief='raised', overrelief='ridge')
+btn.place(x=15, y=90)
 
-btn = Button(janela, text= '3 - sair do sistema', command= janela.destroy, bg= 'red')
-btn.place(x=15, y=120)
+btn = Button(janela, text= '3 - sair do sistema', command= janela.destroy, width=25, height=2, bg= 'red', fg= 'black', font=('Ivy 8 bold'), relief='raised', overrelief='ridge')
+btn.place(x=15, y=140)
 
 
 
