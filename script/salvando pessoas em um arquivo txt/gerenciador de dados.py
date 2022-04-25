@@ -1,7 +1,9 @@
 from datetime import *
 from operator import index
 from tkinter import *
-from matplotlib import image
+from tkinter import font
+from turtle import left
+
 
 #função para verificar a existência de um arquivo .txt na pasta.
 def ArquivoExist(arq):
@@ -30,21 +32,22 @@ def segunda_janela():
     janela2.geometry('600x300+200+200')
 
     logo = Label(janela2, image=imagem)
-    logo.place(x=0, y=0)
+    logo.place(x=-10, y=0)
     
     janela2.resizable(False,False)
-
-    h = Scrollbar(janela2, orient = 'horizontal') 
-
-    h.pack(side = BOTTOM, fill = X) 
 
 
     v = Scrollbar(janela2) 
 
-    v.pack(side = RIGHT, fill = Y) 
+    v.pack(side = RIGHT, fill = Y)
 
-    t = Text(janela2, width = 10, height = 10, wrap = NONE, 
-    xscrollcommand = h.set,  
+    tx = Text(janela2, width = 58, height = 2) 
+    tx.insert(END,"NOME           | SEXO| NASCIMENTO  | PESO  | CONTATO  \n")
+    tx.insert(END,"__" * 28)
+
+    tx.place(x=15, y=5,)
+
+    t = Text(janela2, width = 10, height = 14, wrap = NONE,  
     yscrollcommand = v.set) 
 
     try:
@@ -52,9 +55,6 @@ def segunda_janela():
     except:
         t.insert(END,"Erro ao ler o arquivo")
     else:
-        t.insert(END,"NOME           | SEXO| NASCIMENTO  | PESO  | CONTATO    \n")
-        t.insert(END,"__" * 28)
-        t.insert(END, "\n")
         for linha in a:
             dado = linha.split(';')
             dado[1] = dado[1].replace("\n", "")
@@ -63,25 +63,26 @@ def segunda_janela():
     finally:
         a.close()
 
-    t.pack(side=LEFT, ipadx=200, ipady=200, padx=10, pady=10) 
+    t.pack(side=LEFT, ipadx=192, ipady=5, padx=15, pady=5) 
 
 
-    h.config(command=t.xview) 
+
 
 
     v.config(command=t.yview) 
 
 
-    btn = Button(janela2, text= 'fechar janela3', command= janela2.destroy,  width=11, height=2, bg= 'red', fg= 'black', font=('Ivy 8 bold'), relief='raised', overrelief='ridge')
-    btn.place(x=495, y=240)
+    btn = Button(janela2, text= 'fechar janela', command= janela2.destroy,  width=11, height=2, bg= 'red', fg= 'black', font=('Ivy 8 bold'), relief='raised', overrelief='ridge')
+    btn.place(x=490, y=230)
 
 #janela onde será possível adicionar novos dados. 
 def terceira_janela():
 
     janela3 = Toplevel()
-    logo = Label(janela3, image=imagem)
-    logo.place(x=0, y=0)
     janela3.geometry('500x250+200+200')
+    logo = Label(janela3, image=imagem)
+    logo.place(x=-10, y=0)
+
     janela3.title('adicionar novos dados')
     janela3.resizable(False, False)
 
@@ -294,7 +295,7 @@ imagem = PhotoImage(file= 'C:\\Users\\RAFAEL\\Documents\\minhas-ideias\\tkinter\
 
 image = imagem.subsample(0,0)
 logo = Label(janela, image=imagem)
-logo.place(x=0, y=0)
+logo.place(x=-10, y=0)
 
 
 
