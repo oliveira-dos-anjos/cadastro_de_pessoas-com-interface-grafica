@@ -288,10 +288,10 @@ if not ArquivoExist(arq):
 janela = Tk()
 janela.title("gerenciador de dados pessoais")
 janela['bg'] = 'gray'
-img = PhotoImage(file= 'C:\\Users\\RAFAEL\Desktop\\adição e manipulacão de dados\\dependências\\imagem\\icone.png')
+img = PhotoImage(file= "icone.png")
 janela.iconphoto(True, img)
 
-imagem = PhotoImage(file= 'C:\\Users\\RAFAEL\\Documents\\minhas-ideias\\tkinter\\imagens\\img.GIF')
+imagem = PhotoImage(file= "img.GIF")
 
 image = imagem.subsample(0,0)
 logo = Label(janela, image=imagem)
