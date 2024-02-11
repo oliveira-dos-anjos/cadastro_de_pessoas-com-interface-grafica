@@ -138,7 +138,7 @@ def terceira_janela():
 
 
 
-    #função para valdar e salvar os dados adicionados nas Labels.
+    #função para validar e salvar os dados adicionados nas Labels.
     def salvar():
         contt = 0
         nm = nome.get()
